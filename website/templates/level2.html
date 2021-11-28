@@ -1,0 +1,39 @@
+{% extends "base.html"%} {%block title%} Level 1 {%endblock%} {% block content%}
+<div class="row">
+    <div class="col-sm-12">
+        <h3>So.. let's discuss the Level 2 challenge</h3>
+        <p style="margin-top:30px;">
+            <code>function getLongestPalindrome()</code>
+            <br/>
+            <br/>
+            <strong>Parameters:</strong>
+            <br/> input_string
+
+            <br/>
+            <br/>
+            <strong>Sample Input: </strong>
+            <br/> input_string = "Banana"
+            <br/>
+            <br/>
+            <strong>Sample Output: </strong>
+            <br/> anana
+            <br/>
+            <br/>
+            <strong>Sample Input: </strong>
+            <br/> input_string = "Madama"
+            <br/>
+            <br/>
+            <strong>Sample Output: </strong>
+            <br/> madam
+            <br/>
+            <br/>
+            <strong>Time Complexity: </strong>
+            <br/> O(n^2) Quadratic for determining and checking if the current_substring is a palindrome with the best length
+            <br/>
+            <br/>
+            <strong>Space Complexity: </strong>
+            <br/> O(1) - Constant Space for the longest_palindrome
+        </p>
+    </div>
+</div>
+{% endblock %}
