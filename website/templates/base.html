@@ -38,7 +38,7 @@
                 {% set navigation_bar = [ ('/', 'index', 'Home'), ('/level1', 'level1', 'Level1'), ('/level2', 'level2', 'Level2'), ('/level3', 'level3', 'Level3') ] %} {% set active_page = active_page|default('index') %}
                 <ul class="navbar-nav ml-auto">
                     {% for href, id, caption in navigation_bar %}
-                    <li {% if id==active_page %} class="nav-item active" {% else %} class="nav-item" {% endif%}>>
+                    <li {% if id==active_page %} class="nav-item active" {% else %} class="nav-item" {% endif%}>
                         <a href="{{ href|e }}" class="nav-link">{{ caption|e }} 
 
                             {% if id==active_page %} <span class="sr-only">(current)</span>{% endif%}
