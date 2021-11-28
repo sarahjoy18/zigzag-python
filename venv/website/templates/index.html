@@ -1,0 +1,199 @@
+{% extends "base.html" %} {% block title %} Fun with Palindrome {% endblock %} {% block content%}
+<div class="row">
+    <div class="col-sm-12">
+        <form>
+            <div class="form-group">
+                <label for="input_string">Please enter a String: </label>
+                <input type="text" id="input_string" name="input_string" class="form-control/">
+                <small id="help_text" class="form-text text-muted"><b>Palindrome</b> - a word, phrase, or sequence that reads the same backward as forward, e.g., madam or nurses run.</small>
+            </div>
+            <input type="button" id="check_btn" class="btn btn-primary" value="Check if Palindrome">
+
+            <input type="button" id="long_btn" class="btn btn-primary" value="Get the Longest Palindromic Substring">
+
+            <input type="button" id="cut_btn" class="btn btn-primary" value="Get the Palindrome Cuts">
+        </form>
+    </div>
+</div>
+
+<center>
+    <div class="result_div" style="margin-top: 30px;">
+    </div>
+</center>
+{% endblock %} {% block javascript %}
+<script>
+    $(document).ready(function() {
+
+        //when the 'Check if Palindrome' button is clicked, perform these tasks
+        $('#check_btn').on('click', function() {
+            //get the input string from the textbox
+            var input_string = $('#input_string').val();
+
+            //check if the input string is not empty
+            if (input_string.length > 0) {
+
+                //call the function
+                //if it returns true, set the result variable to 'a Palindrome' else 'not a Palindrome'
+                $.ajax({
+                    type: "POST",
+                    url: "/isPalindrome/" + input_string,
+                    data: JSON.stringify(input_string),
+                    contentType: "application/json",
+                    dataType: 'json'
+                }).then(function(data, textStatus) {
+                    if (textStatus == "success") {
+                        var result = (data) ? 'a Palindrome' : 'not a Palindrome';
+                        //display the result on screen
+                        $('.result_div').html(' <code>' + input_string + '</code> is <b>' + result + '</b>');
+                    } else {
+                        Swal.fire({
+                            title: 'Something went wrong',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+                    }
+                });
+            } else {
+                //show an alert message when the input string is empty
+                Swal.fire({
+                    title: 'Wait',
+                    text: 'Please input a string in the textbox',
+                    icon: 'warning',
+                    confirmButtonText: 'Okay..'
+                }).then(function() {
+
+                    //then, highlight the textbox
+                    $('#input_string').css('border-color', 'red');
+                })
+
+            }
+
+        })
+
+        //when the 'Get the Longest palindromic substring' button is clicked, perform these tasks
+        $('#long_btn').on('click', function() {
+            //get the input string from the textbox
+            var input_string = $('#input_string').val();
+
+            //check if the input string is not empty
+            if (input_string.length > 0) {
+                //call the function
+                //then set the value of the result variable to the longest palindrome
+                $.ajax({
+                    type: "POST",
+                    url: "/getLongestPalindrome/" + input_string,
+                    data: JSON.stringify(input_string),
+                    contentType: "application/json",
+                    dataType: 'json'
+                }).then(function(result, textStatus) {
+                    if (textStatus == "success") {
+                        var markup = (result) ? 'The longest palindrome in <code>' + input_string + '</code> is <b>' + result + '</b>' :
+                            //if there is no palindrome within the input string, display message    
+                            'There is no palindrome in <code>' + input_string + '</code> ';
+
+                        //display the result on screen
+                        $('.result_div').html(markup);
+                    } else {
+                        Swal.fire({
+                            title: 'Something went wrong',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+                    }
+                });
+
+            } else {
+                //show an alert message when the input string is empty
+                Swal.fire({
+                    title: 'Wait',
+                    text: 'Please input a string in the textbox',
+                    icon: 'warning',
+                    confirmButtonText: 'Okay..'
+                }).then(function() {
+
+                    //then, highlight the textbox
+                    $('#input_string').css('border-color', 'red');
+                })
+
+            }
+
+        })
+
+        //when the 'Get the Palidrome Cuts' button is clicked, perform these tasks
+        $('#cut_btn').on('click', function() {
+            //get the input string from the textbox
+            var input_string = $('#input_string').val();
+
+            //check if the input string is not empty
+            if (input_string.length > 0) {
+                //call the function
+                //then set the value of the result variable to the longest palindrome
+                $.ajax({
+                    type: "POST",
+                    url: "/getPalindromeCuts/" + input_string,
+                    data: JSON.stringify(input_string),
+                    contentType: "application/json",
+                    dataType: 'json'
+                }).then(function(result, textStatus) {
+                    if (textStatus == "success") {
+                        var markup = (result.length) ? 'The minimum palindrome cuts in <code>' + input_string + '</code> are <b>' + result + '</b>' :
+                            //if there is no palindrome within the input string, display message    
+                            'There is no palindrome in <code>' + input_string + '</code> ';
+
+                        //display the result on screen
+                        $('.result_div').html(markup);
+                    } else {
+                        Swal.fire({
+                            title: 'Something went wrong',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        })
+                    }
+                });
+
+            } else {
+                //show an alert message when the input string is empty
+                Swal.fire({
+                    title: 'Wait',
+                    text: 'Please input a string in the textbox',
+                    icon: 'warning',
+                    confirmButtonText: 'Okay..'
+                }).then(function() {
+
+                    //then, highlight the textbox
+                    $('#input_string').css('border-color', 'red');
+                })
+
+            }
+
+        })
+
+
+        /*$.ajax({
+            type: "POST",
+            url: "/delete/" + emp_id,
+            data: JSON.stringify(emp_id),
+            contentType: "application/json",
+            dataType: 'json'
+        }).then(function(data, textStatus) {
+            if (textStatus == "success") {
+                Swal.fire(
+                    'Deleted!',
+                    'Employee named <b>' + emp_name + '</b> has been deleted.',
+                    'success'
+                ).then(function() {
+                    $(row).remove();
+                })
+
+            } else {
+                Swal.fire({
+                    title: 'Something went wrong',
+                    html: "Cannot delete employee named <b>" + emp_name + "</b>?",
+                    icon: 'warning',
+                    confirmButtonText: 'Ok'
+                })
+            }
+        });*/
+    });
+</script>
+{% endblock %}

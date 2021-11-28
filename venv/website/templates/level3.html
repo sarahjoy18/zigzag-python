@@ -1,0 +1,37 @@
+{% extends "base.html"%} {%block title%} Level 1 {%endblock%} {% block content%}
+<div class="row">
+    <div class="col-sm-12">
+        <h3>So.. let's discuss the Level 3 challenge</h3>
+        <p style="margin-top:30px;">
+            <code>function getPalindromeCuts()</code>
+            <br/>
+            <br/>
+            <strong>Parameters:</strong>
+            <br/> input_string
+
+            <br/>
+            <br/>
+            <strong>Sample Input: </strong>
+            <br/> input_string = "noonabbada"
+            <br/>
+            <br/>
+            <strong>Sample Output: </strong>
+            <br/> 3 // noon | abba | d | a
+            <br/>
+            <br/>
+            <strong>Time Complexity: </strong>
+            <br/> O(n^2) for the possible substrings (remaining_letters) and checking the best palindrome cuts
+            <br/> O(n) for sorting the palindromes
+            <br/> =O(n^2 x n)
+            <br/> =O(n^3)
+            <br/>
+            <br/>
+            <strong>Space Complexity: </strong>
+            <br/> O(n^2) for the recursion on remaining_letters
+            <br/> O(n) for the palindrome cuts (stored in 1 dimensional array)
+            <br/> =O(n^2 x n)
+            <br/> =O(n^3)
+        </p>
+    </div>
+</div>
+{% endblock %}
