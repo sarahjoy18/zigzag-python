@@ -34,11 +34,18 @@
             <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
 
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
+
+                {% set navigation_bar = [ ('/', 'index', 'Home'), ('/level1', 'level1', 'Level1'), ('/level2', 'level2', 'Level2'), ('/level3', 'level3', 'Level3') ] %} {% set active_page = active_page|default('index') %}
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="/" class="nav-link">Home <span class="sr-only">(current)</span></a></li>
-                    <li class="nav-item"><a href="/level1" class="nav-link">Level 1</a></li>
-                    <li class="nav-item"><a href="/level2" class="nav-link">Level 2</a></li>
-                    <li class="nav-item"><a href="/level3" class="nav-link">Level 3</a></li>
+                    {% for href, id, caption in navigation_bar %}
+                    <li {% if id==active_page %} class="nav-item active" {% else %} class="nav-item" {% endif%}>>
+                        <a href="{{ href|e }}" class="nav-link">{{ caption|e }} 
+
+                            {% if id==active_page %} <span class="sr-only">(current)</span>{% endif%}
+
+                        </a>
+                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
