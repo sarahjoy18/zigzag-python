@@ -59,6 +59,9 @@ O(1) - Constant space
 @views.route("/isPalindrome/<input_string>", methods=["POST", "GET"])
 def isPalindrome(input_string):
 
+    # removed the spaces in the input string and make sure all letters are changed to lowercase
+    input_string = input_string.replace(' ', '').lower()
+
     # compare the reversed string with the input string
     # if it has the same value, then it is considered a palindrome
     # return the result of comparison as json (response to ajax request)
